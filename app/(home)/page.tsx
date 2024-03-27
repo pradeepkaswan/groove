@@ -4,13 +4,13 @@ import { api } from "@/convex/_generated/api"
 import { Id } from "@/convex/_generated/dataModel"
 import { useMutation, useQuery } from "convex/react"
 import { useEffect, useState } from "react"
-import { FileWithUrls } from "../../types"
 import { store } from "@/convex/users"
 import { Heart, Play } from "lucide-react"
 import { cn } from "@/lib/utils"
 import Image from "next/image"
 import { Navbar } from "@/components/navbar"
 import { Player } from "@/components/player"
+import { FileWithUrls } from "@/convex/files"
 
 export default function Home() {
 	const store = useMutation(api.users.store)
@@ -66,33 +66,31 @@ export default function Home() {
 	}
 
 	const filteredSongList = showFavorites
-		? songList.filter((file) => file.isFavorite)
+		? songList.filter((file) => file.favorite)
 		: songList
 
 	return (
 		<>
-			<Navbar />
-
 			<div className="min-h-screen bg-[#121212] rounded-lg m-2">
 				<div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-					<div className="flex w-full justify-between gap-4">
-						<h1 className="text-xl font-medium mb-8 ">Your Library</h1>
+					<div className="flex w-full justify-between gap-4 mb-8">
+						<h1 className="text-xl font-medium">Your Library</h1>
 						<button
 							className="transform transition hover:scale-125 active:scale-150"
 							onClick={() => setShowFavorites(!showFavorites)}
 						>
-							<div className="flex gap-2">
+							<div className="flex gap-2 items-center underline-offset-8 underline">
 								Liked Songs
 								<Heart
 									className={cn(
-										"text-[#BCBCBC] h-6 w-6",
+										"text-[#BCBCBC] h-5 w-5",
 										showFavorites && "fill-red-600 stroke-red-600",
 									)}
 								/>
 							</div>
 						</button>
 					</div>
-					<div className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
+					<div className="grid grid-col-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
 						{filteredSongList.map((file) => (
 							<div
 								key={file.song}
@@ -122,7 +120,7 @@ export default function Home() {
 						))}
 					</div>
 				</div>
-				{/* {fileId && currentSong && (
+				{fileId && currentSong && (
 					<Player
 						id={fileId}
 						title={title}
@@ -132,7 +130,7 @@ export default function Home() {
 						handleNext={handleNext}
 						handlePrev={handlePrev}
 					/>
-				)} */}
+				)}
 			</div>
 		</>
 	)

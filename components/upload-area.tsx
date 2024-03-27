@@ -28,8 +28,9 @@ export const UploadArea = () => {
 	}
 
 	const saveImageStorageId = useMutation(api.files.saveImageStorageId)
-	const saveImagesAfterUpload = async (uploaded: UploadFileResponse[]) => {
+	const saveImageAfterUpload = async (uploaded: UploadFileResponse[]) => {
 		if (songId === null) return
+
 		await saveImageStorageId({
 			imageStorageId: (uploaded[0].response as any).storageId,
 			id: songId,
@@ -38,10 +39,10 @@ export const UploadArea = () => {
 	}
 
 	return (
-		<div className="w-full mx-auto p-6 rounded-md shadow-md">
+		<div className="w-full mx-auto p-2 rounded-md shadow-md">
 			{!songId && (
 				<div>
-					<h2>Add New Song</h2>
+					<h2 className="text-xl mb-4">Upload New Song</h2>
 					<div className="mb-4">
 						<label
 							htmlFor="title"
@@ -52,12 +53,13 @@ export const UploadArea = () => {
 						<input
 							type="text"
 							id="title"
+							placeholder=""
 							value={title}
 							onChange={(e) => setTitle(e.target.value)}
-							placeholder="Enter song title"
+							className="w-full px-4 py-2 rounded-md border border-blue-400 bg-transparent focus:outline-none focus:ring-2 focus:ring-blue-500"
 						/>
 					</div>
-					<div>
+					<div className="mb-4">
 						<label
 							htmlFor="upload"
 							className="block font-medium mb-2"
@@ -77,14 +79,14 @@ export const UploadArea = () => {
 			)}
 			{songId && (
 				<div>
-					<h2 className="text-2xl font-semibold mb-4">Upload Album Cover</h2>
+					<h2 className="text-xl font-semibold mb-4">Upload Album Cover</h2>
 					<div className="mb-4">
 						<UploadDropzone
 							uploadUrl={generateUploadUrl}
 							fileTypes={{
 								"image/*": [".png", ".gif", ".jpeg", ".jpg"],
 							}}
-							onUploadComplete={saveImagesAfterUpload}
+							onUploadComplete={saveImageAfterUpload}
 							onUploadError={(error) => {
 								alert(`ERROR! ${error}`)
 							}}

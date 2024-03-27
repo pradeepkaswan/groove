@@ -3,11 +3,11 @@ import { Button } from "./ui/button"
 import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog"
 import { UploadArea } from "./upload-area"
 
-export const AddSongModal = () => {
+export const UploadSongModal = () => {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<div className="mr-6">
+				<div className="mr-6 cursor-pointer">
 					<CirclePlus className="h-6 w-6" />
 				</div>
 			</DialogTrigger>
