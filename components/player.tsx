@@ -35,7 +35,7 @@ export const Player = ({
 	const { mutate: favorite, pending: favoritePending } = useApiMutation(
 		api.files.favorite,
 	)
-	const { mutate: unfavorite, pending: favoritePending } = useApiMutation(
+	const { mutate: unfavorite, pending: unfavoritePending } = useApiMutation(
 		api.files.unfavorite,
 	)
 
@@ -71,6 +71,7 @@ export const Player = ({
 
 		if (audio) {
 			audio.volume = value[0]
+			setVolume(audi)
 		}
 	}
 

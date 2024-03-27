@@ -65,7 +65,7 @@ export default function Home() {
 		return <div>Loading...</div>
 	}
 
-	const fileredSongList = showFavorites
+	const filteredSongList = showFavorites
 		? songList.filter((file) => file.isFavorite)
 		: songList
 
@@ -122,7 +122,7 @@ export default function Home() {
 						))}
 					</div>
 				</div>
-				{fileId && currentSong && (
+				{/* {fileId && currentSong && (
 					<Player
 						id={fileId}
 						title={title}
@@ -132,7 +132,7 @@ export default function Home() {
 						handleNext={handleNext}
 						handlePrev={handlePrev}
 					/>
-				)}
+				)} */}
 			</div>
 		</>
 	)
